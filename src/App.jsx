@@ -2,10 +2,13 @@ import {CORE_CONCEPTS} from "./data";
 import Header from "./components/Header/Header";
 import CoreConcept from "./components/CoreConectp";
 import TabButton from "./components/TabButton";
+import {useState} from "react";
 
 function App() {
-    function handleSelect(){
-        console.log('hhhh');
+    const [tabContent, setTabContent] =useState('Please click a button11')
+
+    function handleSelect(selectedButton){
+        setTabContent(selectedButton); // 상태 변경 -> 자동 리렌더링
     }
     return (<div>
         <header>
@@ -28,13 +31,13 @@ function App() {
             <section id="examples">
                 <h2>Examples</h2>
                 <menu>
-                    <TabButton onSelect={handleSelect}>Components</TabButton>
-                    <TabButton onSelect={handleSelect}>JSX</TabButton>
-                    <TabButton onSelect={handleSelect}>Props</TabButton>
-                    <TabButton onSelect={handleSelect}>>State</TabButton>
+                    <TabButton onSelect={()=>handleSelect('components')}>Components</TabButton>
+                    <TabButton onSelect={()=>handleSelect('jsx')}>JSX</TabButton>
+                    <TabButton onSelect={()=>handleSelect('props')}>Props</TabButton>
+                    <TabButton onSelect={()=>handleSelect('State')}>State</TabButton>
                 </menu>
             </section>
-
+            {tabContent}
         </main>
     </div>)
 }
